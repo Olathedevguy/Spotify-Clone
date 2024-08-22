@@ -44,8 +44,8 @@ const Player = () => {
 
     return (
         <div className="h-[10%] flex justify-between items-center text-white px-4" style={{ backgroundColor: bgColor }}>
-            <div className="hidden lg:flex items-center gap-4">
-                <img ref={imgRef} className="w-12" src={songsData[0].image} alt="" />
+            <div className="flex items-center gap-4">
+                <img ref={imgRef} className="w-12 inset-0 backdrop-blur-lg" src={songsData[0].image} alt="" />
                 <div>
                     <p>{songsData[0].name}</p>
                     <p>{songsData[0].desc.slice(0, 12)}</p>
@@ -53,13 +53,13 @@ const Player = () => {
             </div>
             <div className="flex flex-col items-center gap-1 m-auto">
                 <div className="flex gap-4 ">
-                    <img className="w-4 cursor-pointer" src={assets.shuffle_icon} alt="" />
-                    <img className="w-4 cursor-pointer" src={assets.prev_icon} alt="" />
-                    <img className="w-4 cursor-pointer" src={assets.play_icon} alt="" />
-                    <img className="w-4 cursor-pointer" src={assets.next_icon} alt="" />
-                    <img className="w-4 cursor-pointer" src={assets.loop_icon} alt="" />
+                    <img className="w-4 cursor-pointer hidden md:flex" src={assets.shuffle_icon} alt="" />
+                    <img className="w-4 cursor-pointer hidden md:flex" src={assets.prev_icon} alt="" />
+                    <img className="w-4 cursor-pointer ml-[190px] md:ml-0" src={assets.play_icon} alt="" />
+                    <img className="w-4 cursor-pointer hidden md:flex" src={assets.next_icon} alt="" />
+                    <img className="w-4 cursor-pointer hidden md:flex" src={assets.loop_icon} alt="" />
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="hidden md:flex items-center gap-5">
                     <p>1:06</p>
                     <div className="w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer">
                         <hr className="h-1 border-none w-0 bg-green-400 rounded-full" />
@@ -67,7 +67,7 @@ const Player = () => {
                     <p>{songsData[0].duration}</p>
                 </div>
             </div>
-            <div className="hidden lg:flex items-center gap-2 opacity-75">
+            <div className="hidden lg:flex items-center gap-2 opacity-75 ">
                 <img className="w-4" src={assets.plays_icon} alt="" />
                 <img className="w-4" src={assets.mic_icon} alt="" />
                 <img className="w-4" src={assets.queue_icon} alt="" />
