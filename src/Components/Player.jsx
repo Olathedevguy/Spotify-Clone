@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { assets, songsData } from "../assets/assets";
+import { PlayerContext } from "../Context/PlayerContext";
 
 const Player = () => {
     const imgRef = useRef(null);
@@ -42,29 +43,38 @@ const Player = () => {
         };
     }, []);
 
+
+
+    const {seekBar, seekBg, playStatus, play, pause, track, Time, previous, next, seekSong} = useContext(PlayerContext)
+
     return (
         <div className="h-[10%] flex justify-between items-center text-white px-4" style={{ backgroundColor: bgColor }}>
             <div className="flex items-center gap-4">
-                <img ref={imgRef} className="w-12 inset-0 backdrop-blur-lg" src={songsData[0].image} alt="" />
+                <img ref={imgRef} className="w-12 inset-0 backdrop-blur-lg" src={track.image} alt="" />
                 <div>
-                    <p>{songsData[0].name}</p>
-                    <p>{songsData[0].desc.slice(0, 12)}</p>
+                    <p>{track.name}</p>
+                    <p>{track.desc.slice(0, 12)}</p>
                 </div>
             </div>
             <div className="flex flex-col items-center gap-1 m-auto">
                 <div className="flex gap-4 ">
                     <img className="w-4 cursor-pointer hidden md:flex" src={assets.shuffle_icon} alt="" />
-                    <img className="w-4 cursor-pointer hidden md:flex" src={assets.prev_icon} alt="" />
-                    <img className="w-4 cursor-pointer ml-[190px] md:ml-0" src={assets.play_icon} alt="" />
-                    <img className="w-4 cursor-pointer hidden md:flex" src={assets.next_icon} alt="" />
+                    <img onClick={previous} className="w-4 cursor-pointer hidden md:flex" src={assets.prev_icon} alt="" />
+                    {
+                        playStatus ? <img onClick={pause} className="w-4 cursor-pointer ml-[190px] md:ml-0" src={assets.pause_icon} alt="" /> : 
+                        <img onClick={play} className="w-4 cursor-pointer ml-[190px] md:ml-0" src={assets.play_icon} alt="" />
+                    }
+                    
+                    
+                    <img onClick={next} className="w-4 cursor-pointer hidden md:flex" src={assets.next_icon} alt="" />
                     <img className="w-4 cursor-pointer hidden md:flex" src={assets.loop_icon} alt="" />
                 </div>
                 <div className="hidden md:flex items-center gap-5">
-                    <p>1:06</p>
-                    <div className="w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer">
-                        <hr className="h-1 border-none w-0 bg-green-400 rounded-full" />
+                    <p>{Time.currentTime.minute}:{Time.currentTime.second}</p>
+                    <div ref={seekBg} onClick={seekSong} className="w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer">
+                        <hr ref={seekBar} className="h-1 border-none w-0 bg-green-400 rounded-full" />
                     </div>
-                    <p>{songsData[0].duration}</p>
+                    <p>{Time.duration.minute}:{Time.duration.second}</p>
                 </div>
             </div>
             <div className="hidden lg:flex items-center gap-2 opacity-75 ">

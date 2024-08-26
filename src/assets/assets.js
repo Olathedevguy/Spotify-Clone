@@ -87,14 +87,14 @@ export const albumsData = [
         name: "Top 50 Naija",
         image: img9,
         desc:"Your weekly update of the most played tracks",
-        bgColor:"#22543d"
+        bgColor:"#a25ce0"
     },
     {   
         id:2,
         name: "Trending Naija",
         image: img10,
         desc:"Your weekly update of the most played tracks",
-        bgColor:"#742a2a"
+        bgColor:"#1154A5"
     },
     {   
         id:3,
